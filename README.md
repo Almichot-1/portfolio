@@ -1,21 +1,18 @@
-# Ahmed Yassin - Portfolio
+# Ahmed Yassin Ahmed - Portfolio
 
-Backend-heavy full-stack engineer specializing in Go, Microservices, and Distributed Systems.
+Evidence-based portfolio for internship, junior, and freelance opportunities.
 
-## Tech Stack
+Positioning:
+Software Engineering student building backend-focused full-stack systems with Go, Next.js, and Flutter.
 
-**Frontend:**
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- Shadcn/UI components
+## What this site includes
 
-**Backend (for demos):**
-- Go (Gin/Fiber)
-- PostgreSQL
-- Redis
-- Docker
+- Grounded hero and summary with no inflated claims
+- Featured projects tied to public repositories
+- Resume snapshot on the homepage
+- Dedicated resume route: `/resume`
+- Skills grouped by demonstrated depth
+- Contact section with safe form configuration + direct email fallback
 
 ## Getting Started
 
@@ -35,38 +32,40 @@ npm start
 
 Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
+## Tech Stack
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+
 ## Project Structure
 
 ```
 ├── app/
 │   ├── layout.tsx          # Root layout with fonts and metadata
-│   ├── page.tsx            # Main page composition
+│   ├── page.tsx            # Portfolio homepage
+│   └── resume/page.tsx     # Dedicated resume page
 │   └── globals.css         # Global styles and design tokens
 ├── components/
 │   ├── sections/           # Page sections
 │   │   ├── hero.tsx
-│   │   ├── philosophy.tsx
 │   │   ├── systems.tsx
+│   │   ├── resume-snapshot.tsx
 │   │   ├── tech-stack.tsx
-│   │   ├── notes.tsx
 │   │   ├── about.tsx
 │   │   └── contact.tsx
 │   └── ui/                 # Reusable UI components
 │       ├── button.tsx
 │       ├── card.tsx
 │       └── badge.tsx
+├── content/
+│   ├── portfolio.ts        # Core site content and featured projects
+│   └── resume.ts           # Structured resume data source
 ├── lib/
 │   └── utils.ts            # Utility functions
 └── public/                 # Static assets
 ```
-
-## Design Principles
-
-- **Dark-mode first**: Optimized for extended reading sessions
-- **Minimal animations**: Functional, not decorative
-- **Grid-based layout**: Clean, architectural structure
-- **High contrast**: Accessibility and readability
-- **Typography hierarchy**: Clear information architecture
 
 ## Deployment
 
@@ -80,18 +79,14 @@ Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
 ## Environment Variables
 
-Create a `.env.local` file for any API endpoints:
+Create `.env.local` as needed:
 
 ```env
 NEXT_PUBLIC_API_URL=your_api_url_here
+NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your_web3forms_key_here
 ```
 
-## Customization
-
-1. Update personal information in `components/sections/hero.tsx`
-2. Modify systems showcase in `components/sections/systems.tsx`
-3. Add architecture notes in `components/sections/notes.tsx`
-4. Adjust design tokens in `app/globals.css`
+If `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` is not set, the contact form stays disabled and users are directed to email/LinkedIn.
 
 ## License
 

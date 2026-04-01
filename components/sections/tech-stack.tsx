@@ -2,55 +2,52 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
+import { skills } from "@/content/portfolio";
 
-const techStack = {
-  Languages: ["Go", "TypeScript", "Java", "Python"],
-  Backend: ["Gin", "Fiber", "gRPC", "REST"],
-  Messaging: ["Kafka", "RabbitMQ", "Redis Streams"],
-  Databases: ["PostgreSQL", "Redis", "MongoDB"],
-  Observability: ["Prometheus", "Grafana", "OpenTelemetry", "Jaeger"],
-  Frontend: ["React", "Next.js", "Tailwind CSS", "Flutter"],
-  DevOps: ["Docker", "Kubernetes", "Terraform", "GitHub Actions"],
-};
+const skillGroups = [
+  { title: "Used in projects", items: skills.usedInProjects },
+  { title: "Comfortable with", items: skills.comfortableWith },
+  { title: "Currently learning / exploring", items: skills.currentlyLearning },
+];
 
 export function TechStack() {
   return (
-    <section className="py-24 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section className="border-y border-border/70 bg-secondary/20 px-4 py-20 md:py-24">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Tech Stack</h2>
-          <p className="text-muted-foreground text-lg mb-12">
-            Tools chosen for production reliability, not resume padding.
+          <h2 className="mb-3 text-3xl font-semibold md:text-4xl">Skills & Tools</h2>
+          <p className="mb-10 max-w-3xl text-muted-foreground md:text-lg">
+            Grouped by demonstrated usage level, so recruiters can quickly understand depth.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Object.entries(techStack).map(([category, technologies], index) => (
+        <div className="grid gap-6 md:grid-cols-3">
+          {skillGroups.map((group, index) => (
             <motion.div
-              key={category}
+              key={group.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
+              transition={{ duration: 0.35, delay: index * 0.08 }}
             >
               <Card className="h-full">
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-4 text-primary font-mono">
-                    {category}
+                  <h3 className="mb-4 text-lg font-semibold text-primary">
+                    {group.title}
                   </h3>
                   <ul className="space-y-2">
-                    {technologies.map((tech) => (
+                    {group.items.map((item) => (
                       <li
-                        key={tech}
+                        key={item}
                         className="text-muted-foreground flex items-center gap-2"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        {tech}
+                        {item}
                       </li>
                     ))}
                   </ul>

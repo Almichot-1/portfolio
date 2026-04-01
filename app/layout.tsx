@@ -1,21 +1,38 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ 
+const sans = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
 });
 
-const jetbrainsMono = JetBrains_Mono({ 
+const mono = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+  variable: "--font-mono",
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "Ahmed Yassin | Backend-Heavy Full-Stack Engineer",
-  description: "Designing resilient backend systems that scale under pressure. Specializing in Go, Microservices, and Distributed Systems.",
-  keywords: ["Go", "Microservices", "Distributed Systems", "Backend Engineer", "Full-Stack"],
+  metadataBase: new URL("https://ahmedyassin.vercel.app"),
+  title: "Ahmed Yassin Ahmed | Backend-Focused Software Engineering Student",
+  description:
+    "Portfolio of Ahmed Yassin Ahmed, a Software Engineering student building backend-focused full-stack systems with Go, Next.js, and Flutter.",
+  keywords: [
+    "Ahmed Yassin Ahmed",
+    "Software Engineering student",
+    "Go developer",
+    "Next.js portfolio",
+    "Flutter projects",
+    "Backend-focused full-stack",
+  ],
+  openGraph: {
+    title: "Ahmed Yassin Ahmed | Portfolio",
+    description:
+      "Evidence-based portfolio focused on backend and full-stack project work in Go, Next.js, and Flutter.",
+    type: "website",
+    url: "https://ahmedyassin.vercel.app",
+  },
 };
 
 export default function RootLayout({
@@ -25,7 +42,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body className={`${sans.variable} ${mono.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>

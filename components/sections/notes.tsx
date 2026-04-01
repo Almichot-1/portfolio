@@ -63,7 +63,7 @@ export function Notes() {
             Architecture Notes
           </h2>
           <p className="text-muted-foreground text-lg mb-12">
-            Engineering insights from building systems that don't break.
+            Engineering insights from building systems that do not break.
           </p>
         </motion.div>
 
