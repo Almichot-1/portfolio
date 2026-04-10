@@ -5,20 +5,20 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const principles = [
   {
-    title: "Fail-Fast, Fail-Safe",
-    description: "Detect failures early, contain them gracefully, and maintain system integrity.",
+    title: "Workflow clarity first",
+    description: "States, approvals, and handoffs should be explicit so business systems stay understandable.",
   },
   {
-    title: "Observability > Features",
-    description: "You can't fix what you can't see. Metrics, traces, and logs are first-class citizens.",
+    title: "Data integrity matters",
+    description: "Users can forgive rough edges, but they do not forgive broken records or inconsistent state.",
   },
   {
-    title: "Explicit over Clever",
-    description: "Code clarity beats algorithmic elegance. Future maintainers will thank you.",
+    title: "Explicit over clever",
+    description: "Clear code and clear boundaries matter more than clever abstractions.",
   },
   {
-    title: "Data Consistency Beats UI Polish",
-    description: "Users forgive slow UIs. They don't forgive lost money or corrupted state.",
+    title: "Build what the workflow needs",
+    description: "Start with the business rules, then add the supporting product surface that helps people use them.",
   },
 ];
 
@@ -36,7 +36,7 @@ export function Philosophy() {
             Engineering Philosophy
           </h2>
           <p className="text-muted-foreground text-lg mb-12">
-            Principles that guide system design decisions.
+            Principles that guide backend and workflow design decisions.
           </p>
         </motion.div>
 

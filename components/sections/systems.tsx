@@ -21,7 +21,7 @@ export function Systems() {
         >
           <h2 className="mb-3 text-3xl font-semibold md:text-4xl">Featured Projects</h2>
           <p className="mb-10 max-w-3xl text-muted-foreground md:text-lg">
-            Selected work with public code and concrete technical decisions. Project cards are scannable first, with deeper notes on demand.
+            Selected work ordered to show backend depth first, with public code and concrete engineering decisions behind each project.
           </p>
         </motion.div>
 

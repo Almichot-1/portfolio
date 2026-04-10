@@ -6,68 +6,66 @@ import { FileText, ArrowRight } from "lucide-react";
 
 const notes = [
   {
-    title: "Why Sagas Beat Distributed Transactions",
-    summary: "Exploring compensating transactions, failure recovery, and why 2PC doesn't scale in microservices.",
+    title: "Designing Idempotent APIs in Go",
+    summary: "Patterns for duplicate request handling, safe retries, and keeping backend workflows predictable.",
     date: "2025-01",
     readTime: "8 min",
-    slug: "sagas-vs-distributed-transactions",
+    slug: "designing-idempotent-apis-go",
   },
   {
-    title: "Designing Idempotent APIs in Go",
-    summary: "Practical patterns for handling duplicate requests, idempotency keys, and state reconciliation.",
+    title: "Keeping Workflow States Explicit",
+    summary: "Why business systems benefit from clear lifecycle states, transitions, and validation rules.",
     date: "2024-12",
     readTime: "6 min",
-    slug: "idempotent-apis-go",
+    slug: "keeping-workflow-states-explicit",
   },
   {
-    title: "When NOT to Use Microservices",
-    summary: "Monoliths aren't evil. Understanding when distributed complexity outweighs the benefits.",
+    title: "Background Jobs for Business Systems",
+    summary: "How workers, expiry checks, and asynchronous processing support operational workflows.",
     date: "2024-11",
     readTime: "5 min",
-    slug: "when-not-microservices",
+    slug: "background-jobs-business-systems",
   },
   {
-    title: "RabbitMQ vs Kafka: Operational Reality",
-    summary: "Beyond the marketing: actual operational trade-offs, failure modes, and when to choose each.",
+    title: "Role-Based Access in Multi-Actor Platforms",
+    summary: "Structuring authorization so agencies, admins, and users can work inside clear boundaries.",
     date: "2024-10",
     readTime: "10 min",
-    slug: "rabbitmq-vs-kafka",
+    slug: "role-based-access-multi-actor-platforms",
   },
   {
-    title: "Circuit Breakers in Production",
-    summary: "Implementing resilience patterns in Go: timeouts, retries, and graceful degradation.",
+    title: "What Makes a Good Backend MVP",
+    summary: "How to scope authentication, authorization, and data models without overbuilding the first version.",
     date: "2024-09",
     readTime: "7 min",
-    slug: "circuit-breakers-production",
+    slug: "good-backend-mvp",
   },
   {
-    title: "Event Sourcing: The Good Parts",
-    summary: "Audit trails, time travel debugging, and replay—without the complexity overhead.",
+    title: "Model the Workflow Before the UI",
+    summary: "Why backend design decisions usually determine whether a business product stays maintainable.",
     date: "2024-08",
     readTime: "9 min",
-    slug: "event-sourcing-good-parts",
+    slug: "model-workflow-before-ui",
   },
 ];
 
 export function Notes() {
   return (
-    <section id="notes" className="py-24 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section id="notes" className="px-4 py-24">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Architecture Notes
-          </h2>
-          <p className="text-muted-foreground text-lg mb-12">
-            Engineering insights from building systems that do not break.
+          <h2 className="mb-4 text-4xl font-bold md:text-5xl">Architecture Notes</h2>
+          <p className="mb-12 text-lg text-muted-foreground">
+            Short notes on backend design, workflow systems, and practical implementation trade-offs.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid gap-6 md:grid-cols-2">
           {notes.map((note, index) => (
             <motion.div
               key={note.slug}
@@ -76,21 +74,21 @@ export function Notes() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
             >
-              <Card className="h-full hover:border-primary/50 transition-colors group cursor-pointer">
+              <Card className="group h-full cursor-pointer transition-colors hover:border-primary/50">
                 <CardHeader>
-                  <div className="flex items-start gap-3 mb-2">
-                    <FileText className="w-5 h-5 text-primary mt-1" />
+                  <div className="mb-2 flex items-start gap-3">
+                    <FileText className="mt-1 h-5 w-5 text-primary" />
                     <div className="flex-1">
-                      <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors">
+                      <CardTitle className="mb-2 text-xl transition-colors group-hover:text-primary">
                         {note.title}
                       </CardTitle>
                       <div className="flex items-center gap-3 text-sm text-muted-foreground">
                         <span>{note.date}</span>
-                        <span>•</span>
+                        <span>&bull;</span>
                         <span>{note.readTime}</span>
                       </div>
                     </div>
-                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="h-5 w-5 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary" />
                   </div>
                 </CardHeader>
                 <CardContent>

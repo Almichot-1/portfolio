@@ -15,21 +15,23 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ahmedyassin.vercel.app"),
-  title: "Ahmed Yassin Ahmed | Backend-Focused Software Engineering Student",
+  title: "Ahmed Yassin Ahmed | Backend Engineer",
   description:
-    "Portfolio of Ahmed Yassin Ahmed, a Software Engineering student building backend-focused full-stack systems with Go, Next.js, and Flutter.",
+    "Portfolio of Ahmed Yassin Ahmed, a backend engineer and Software Engineering student focused on Go, APIs, workflow-heavy systems, and reliable backend architecture.",
   keywords: [
     "Ahmed Yassin Ahmed",
+    "Backend Engineer",
     "Software Engineering student",
-    "Go developer",
-    "Next.js portfolio",
-    "Flutter projects",
-    "Backend-focused full-stack",
+    "Go",
+    "PostgreSQL",
+    "RabbitMQ",
+    "Workflow systems",
+    "API design",
   ],
   openGraph: {
-    title: "Ahmed Yassin Ahmed | Portfolio",
+    title: "Ahmed Yassin Ahmed | Backend Engineer",
     description:
-      "Evidence-based portfolio focused on backend and full-stack project work in Go, Next.js, and Flutter.",
+      "Backend engineer portfolio centered on Go, APIs, workflow-heavy systems, and reliable backend architecture.",
     type: "website",
     url: "https://ahmedyassin.vercel.app",
   },

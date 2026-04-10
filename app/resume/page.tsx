@@ -86,30 +86,30 @@ export default function ResumePage() {
               <div className="grid gap-4 md:grid-cols-3">
                 <div>
                   <h3 className="mb-2 text-sm uppercase tracking-[0.15em] text-muted-foreground">
-                    Used in projects
+                    Core Backend
                   </h3>
                   <ul className="space-y-1 text-sm text-muted-foreground">
-                    {resumeData.strengths.usedInProjects.map((item) => (
+                    {resumeData.strengths.coreBackend.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
                 <div>
                   <h3 className="mb-2 text-sm uppercase tracking-[0.15em] text-muted-foreground">
-                    Comfortable with
+                    Supporting Product Delivery
                   </h3>
                   <ul className="space-y-1 text-sm text-muted-foreground">
-                    {resumeData.strengths.comfortableWith.map((item) => (
+                    {resumeData.strengths.supportingProductDelivery.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
                 <div>
                   <h3 className="mb-2 text-sm uppercase tracking-[0.15em] text-muted-foreground">
-                    Currently learning
+                    Engineering Focus
                   </h3>
                   <ul className="space-y-1 text-sm text-muted-foreground">
-                    {resumeData.strengths.currentlyLearning.map((item) => (
+                    {resumeData.strengths.engineeringFocus.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>

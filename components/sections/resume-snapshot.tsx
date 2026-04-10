@@ -18,7 +18,7 @@ export function ResumeSnapshot() {
         >
           <h2 className="mb-3 text-3xl font-semibold md:text-4xl">Resume Snapshot</h2>
           <p className="max-w-3xl text-muted-foreground md:text-lg">
-            Short summary for recruiter review. A detailed version is available on the dedicated resume page.
+            Short recruiter summary of Ahmed&apos;s backend work. A detailed version is available on the dedicated resume page.
           </p>
         </motion.div>
 

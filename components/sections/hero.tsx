@@ -54,7 +54,7 @@ export function Hero() {
 
             <div className="mb-10 flex flex-wrap gap-3">
               <Button size="lg" asChild>
-                <a href="#projects">View Projects</a>
+                <a href="#projects">View Backend Work</a>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <a href="/resume">Resume</a>
@@ -94,7 +94,7 @@ export function Hero() {
             className="rounded-xl border border-border/80 bg-secondary/40 p-6 md:max-w-xs"
           >
             <p className="mb-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              Proof of focus
+              Backend focus
             </p>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {profile.proofStrip.map((item) => (

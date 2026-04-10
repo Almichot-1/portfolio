@@ -5,9 +5,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { skills } from "@/content/portfolio";
 
 const skillGroups = [
-  { title: "Used in projects", items: skills.usedInProjects },
-  { title: "Comfortable with", items: skills.comfortableWith },
-  { title: "Currently learning / exploring", items: skills.currentlyLearning },
+  { title: "Core Backend", items: skills.coreBackend },
+  {
+    title: "Supporting Product Delivery",
+    items: skills.supportingProductDelivery,
+  },
+  { title: "Engineering Focus", items: skills.engineeringFocus },
 ];
 
 export function TechStack() {
@@ -20,9 +23,9 @@ export function TechStack() {
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
         >
-          <h2 className="mb-3 text-3xl font-semibold md:text-4xl">Skills & Tools</h2>
+          <h2 className="mb-3 text-3xl font-semibold md:text-4xl">Skills & Focus</h2>
           <p className="mb-10 max-w-3xl text-muted-foreground md:text-lg">
-            Grouped by demonstrated usage level, so recruiters can quickly understand depth.
+            Backend depth first, supporting product delivery second, and working style kept explicit.
           </p>
         </motion.div>
 

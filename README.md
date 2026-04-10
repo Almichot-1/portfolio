@@ -1,17 +1,17 @@
 # Ahmed Yassin Ahmed - Portfolio
 
-Evidence-based portfolio for internship, junior, and freelance opportunities.
+Evidence-based portfolio for backend internship, junior backend, and software engineering opportunities.
 
 Positioning:
-Software Engineering student building backend-focused full-stack systems with Go, Next.js, and Flutter.
+Backend Engineer focused on Go, APIs, workflow-heavy systems, and reliable backend architecture.
 
 ## What this site includes
 
-- Grounded hero and summary with no inflated claims
-- Featured projects tied to public repositories
+- Backend-first hero, summary, and resume copy
+- Featured projects ordered to lead with backend systems work
 - Resume snapshot on the homepage
 - Dedicated resume route: `/resume`
-- Skills grouped by demonstrated depth
+- Skills grouped as core backend, supporting delivery, and engineering focus
 - Contact section with safe form configuration + direct email fallback
 
 ## Getting Started
