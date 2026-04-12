@@ -8,6 +8,8 @@ export type FeaturedProject = {
   decisions: string[];
   outcome: string;
   learnings: string[];
+  demoUrl?: string;
+  demoEmbedUrl?: string;
 };
 
 export const profile = {
@@ -119,6 +121,8 @@ export const featuredProjects: FeaturedProject[] = [
       "How managed backend services can accelerate early product delivery.",
       "How to keep mobile product structure maintainable as coordination flows expand.",
     ],
+    demoUrl: "https://youtu.be/X75veFvFU24",
+    demoEmbedUrl: "https://www.youtube.com/embed/X75veFvFU24",
   },
 ];
 

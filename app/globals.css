@@ -4,17 +4,17 @@
 
 @layer base {
   :root {
-    --background: 220 33% 8%;
-    --foreground: 214 26% 94%;
-    --primary: 192 90% 60%;
-    --primary-foreground: 218 43% 9%;
-    --secondary: 221 24% 14%;
+    --background: 223 42% 6%;
+    --foreground: 210 40% 96%;
+    --primary: 190 94% 63%;
+    --primary-foreground: 220 43% 9%;
+    --secondary: 220 27% 11%;
     --secondary-foreground: 214 26% 94%;
-    --muted: 220 20% 18%;
-    --muted-foreground: 216 14% 71%;
-    --accent: 220 20% 18%;
+    --muted: 220 26% 16%;
+    --muted-foreground: 214 18% 72%;
+    --accent: 220 24% 14%;
     --accent-foreground: 214 26% 94%;
-    --border: 220 20% 20%;
+    --border: 218 27% 18%;
   }
 }
 
@@ -22,10 +22,47 @@
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
+    min-height: 100vh;
+    overflow-x: hidden;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background-image: radial-gradient(circle at 10% -10%, rgba(90, 170, 210, 0.08), transparent 50%);
+    background-image:
+      radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.12), transparent 30%),
+      radial-gradient(circle at 85% 10%, rgba(14, 165, 233, 0.16), transparent 32%),
+      radial-gradient(circle at 50% 100%, rgba(8, 145, 178, 0.12), transparent 36%),
+      linear-gradient(180deg, #050916 0%, #060d18 28%, #08101a 58%, #040914 100%);
+    background-attachment: fixed;
+    position: relative;
+  }
+
+  body::before,
+  body::after {
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: fixed;
+  }
+
+  body::before {
+    background-image:
+      linear-gradient(rgba(186, 230, 253, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(186, 230, 253, 0.06) 1px, transparent 1px);
+    background-size: 88px 88px;
+    mask-image: radial-gradient(circle at center, black 18%, transparent 78%);
+    opacity: 0.45;
+  }
+
+  body::after {
+    background:
+      radial-gradient(circle at center, rgba(56, 189, 248, 0.12), transparent 52%),
+      linear-gradient(180deg, rgba(2, 6, 23, 0), rgba(2, 6, 23, 0.72));
+    opacity: 0.9;
   }
 
   h1,
@@ -39,6 +76,108 @@
   pre,
   .font-mono {
     font-family: var(--font-mono), monospace;
+  }
+
+  a {
+    transition:
+      color 160ms ease,
+      border-color 160ms ease,
+      transform 160ms ease,
+      background-color 160ms ease;
+  }
+
+  input,
+  textarea,
+  iframe {
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  .site-shell {
+    position: relative;
+  }
+
+  .panel-surface {
+    background:
+      linear-gradient(160deg, rgba(10, 18, 30, 0.88), rgba(6, 12, 22, 0.78)),
+      linear-gradient(180deg, rgba(56, 189, 248, 0.04), transparent 32%);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    box-shadow:
+      0 24px 80px rgba(2, 6, 23, 0.38),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    position: relative;
+  }
+
+  .panel-surface::before {
+    background:
+      radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 42%),
+      radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.12), transparent 38%);
+    content: "";
+    inset: 0;
+    opacity: 0.9;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .panel-surface > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-shell {
+    border-radius: 32px;
+    overflow: hidden;
+    padding: 1.5rem;
+  }
+
+  .surface-grid::after {
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+    content: "";
+    inset: 0;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.52), transparent 72%);
+    opacity: 0.18;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .depth-card {
+    transform-style: preserve-3d;
+    transition:
+      transform 260ms ease,
+      border-color 260ms ease,
+      box-shadow 260ms ease,
+      background-color 260ms ease;
+  }
+
+  .depth-card:hover {
+    border-color: rgba(125, 211, 252, 0.28);
+    box-shadow:
+      0 30px 90px rgba(2, 6, 23, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transform: translateY(-6px) rotateX(1.8deg) rotateY(-1.8deg);
+  }
+
+  .section-kicker {
+    color: rgba(186, 230, 253, 0.72);
+    display: inline-flex;
+    font-size: 0.72rem;
+    letter-spacing: 0.26em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .inline-chip {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 999px;
+    display: inline-flex;
+    gap: 0.55rem;
+    padding: 0.6rem 0.9rem;
   }
 }
 

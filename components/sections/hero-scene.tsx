@@ -2,6 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { cn } from "@/lib/utils";
+
+type HeroSceneProps = {
+  className?: string;
+};
 
 function disposeMaterial(material: THREE.Material | THREE.Material[]) {
   if (Array.isArray(material)) {
@@ -12,7 +17,7 @@ function disposeMaterial(material: THREE.Material | THREE.Material[]) {
   material.dispose();
 }
 
-export function HeroScene() {
+export function HeroScene({ className }: HeroSceneProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -23,8 +28,8 @@ export function HeroScene() {
     }
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-    camera.position.set(0, 0.2, 7.2);
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+    camera.position.set(0, 0.1, 7.4);
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -35,57 +40,64 @@ export function HeroScene() {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
-    const ambientLight = new THREE.AmbientLight(0x7bc8ff, 0.85);
-    const keyLight = new THREE.PointLight(0x4fc3f7, 14, 20, 2);
-    keyLight.position.set(2.8, 1.8, 4.5);
-
-    const rimLight = new THREE.PointLight(0x0ea5e9, 8, 18, 2);
-    rimLight.position.set(-3.6, -1.8, -1.5);
-
+    const ambientLight = new THREE.AmbientLight(0xbfe5ff, 0.72);
+    const keyLight = new THREE.PointLight(0x67e8f9, 15, 24, 2);
+    keyLight.position.set(2.6, 2.4, 4.6);
+    const rimLight = new THREE.PointLight(0x38bdf8, 9, 18, 2);
+    rimLight.position.set(-3.8, -1.8, -1.4);
     scene.add(ambientLight, keyLight, rimLight);
 
     const cluster = new THREE.Group();
     scene.add(cluster);
 
-    const wireCoreGeometry = new THREE.IcosahedronGeometry(1.45, 1);
+    const wireCoreGeometry = new THREE.IcosahedronGeometry(1.42, 1);
     const wireCoreMaterial = new THREE.MeshPhongMaterial({
-      color: 0x7dd3fc,
-      emissive: 0x0f3a52,
-      emissiveIntensity: 0.9,
-      opacity: 0.45,
-      shininess: 90,
+      color: 0x9fe9ff,
+      emissive: 0x08364a,
+      emissiveIntensity: 1,
+      opacity: 0.48,
+      shininess: 100,
       transparent: true,
       wireframe: true,
     });
     const wireCore = new THREE.Mesh(wireCoreGeometry, wireCoreMaterial);
     cluster.add(wireCore);
 
-    const edgesGeometry = new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(1.78, 0));
-    const edgesMaterial = new THREE.LineBasicMaterial({
-      color: 0xb8ecff,
-      opacity: 0.55,
+    const shellGeometry = new THREE.TorusKnotGeometry(1.55, 0.18, 180, 24, 2, 3);
+    const shellMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x0f172a,
+      emissive: 0x0ea5e9,
+      emissiveIntensity: 0.18,
+      metalness: 0.42,
+      roughness: 0.24,
+      opacity: 0.3,
       transparent: true,
     });
-    const shell = new THREE.LineSegments(edgesGeometry, edgesMaterial);
+    const shell = new THREE.Mesh(shellGeometry, shellMaterial);
     cluster.add(shell);
 
-    const orbitalGeometry = new THREE.TorusGeometry(2.35, 0.04, 16, 180);
-    const orbitalMaterial = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
-      opacity: 0.45,
+    const ringGeometry = new THREE.TorusGeometry(2.45, 0.045, 18, 180);
+    const ringMaterial = new THREE.MeshBasicMaterial({
+      color: 0x7dd3fc,
+      opacity: 0.38,
       transparent: true,
     });
-    const orbitalRing = new THREE.Mesh(orbitalGeometry, orbitalMaterial);
-    orbitalRing.rotation.set(1.12, 0.32, 0.4);
-    cluster.add(orbitalRing);
+    const ringA = new THREE.Mesh(ringGeometry, ringMaterial);
+    ringA.rotation.set(1.14, 0.22, 0.42);
+    cluster.add(ringA);
 
-    const particleCount = 180;
+    const ringB = new THREE.Mesh(ringGeometry, ringMaterial.clone());
+    ringB.rotation.set(0.4, 1.02, -0.2);
+    ringB.scale.setScalar(0.88);
+    cluster.add(ringB);
+
+    const particleCount = 220;
     const particlePositions = new Float32Array(particleCount * 3);
 
     for (let index = 0; index < particleCount; index += 1) {
-      const radius = THREE.MathUtils.randFloat(2.1, 3.45);
+      const radius = THREE.MathUtils.randFloat(2.2, 3.65);
       const angle = THREE.MathUtils.randFloat(0, Math.PI * 2);
-      const height = THREE.MathUtils.randFloatSpread(1.9);
+      const height = THREE.MathUtils.randFloatSpread(2.2);
       const offset = index * 3;
 
       particlePositions[offset] = Math.cos(angle) * radius;
@@ -98,33 +110,15 @@ export function HeroScene() {
       "position",
       new THREE.BufferAttribute(particlePositions, 3)
     );
-
     const particlesMaterial = new THREE.PointsMaterial({
       color: 0xe0f2fe,
       opacity: 0.95,
-      size: 0.045,
+      size: 0.042,
       sizeAttenuation: true,
       transparent: true,
     });
     const particles = new THREE.Points(particlesGeometry, particlesMaterial);
     cluster.add(particles);
-
-    const nodeGeometry = new THREE.SphereGeometry(0.055, 14, 14);
-    const nodeMaterial = new THREE.MeshBasicMaterial({
-      color: 0xf8fafc,
-      opacity: 0.85,
-      transparent: true,
-    });
-
-    const nodes = Array.from({ length: 10 }, (_, index) => {
-      const angle = (index / 10) * Math.PI * 2;
-      const mesh = new THREE.Mesh(nodeGeometry, nodeMaterial);
-
-      mesh.position.set(Math.cos(angle) * 2.6, Math.sin(angle * 1.8) * 0.5, Math.sin(angle) * 2.4);
-      cluster.add(mesh);
-
-      return mesh;
-    });
 
     const pointer = new THREE.Vector2(0, 0);
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -133,7 +127,6 @@ export function HeroScene() {
       const bounds = container.getBoundingClientRect();
       const x = (event.clientX - bounds.left) / bounds.width;
       const y = (event.clientY - bounds.top) / bounds.height;
-
       pointer.set((x - 0.5) * 2, (y - 0.5) * 2);
     };
 
@@ -165,36 +158,28 @@ export function HeroScene() {
 
     const animate = () => {
       const elapsed = clock.getElapsedTime();
-      const targetX = prefersReducedMotion ? 0.12 : pointer.y * 0.22;
-      const targetY = prefersReducedMotion ? 0.35 : pointer.x * 0.35;
+      const targetX = prefersReducedMotion ? 0.1 : pointer.y * 0.2;
+      const targetY = prefersReducedMotion ? 0.24 : pointer.x * 0.3;
 
       cluster.rotation.x = THREE.MathUtils.lerp(cluster.rotation.x, targetX, 0.04);
       cluster.rotation.y = THREE.MathUtils.lerp(cluster.rotation.y, targetY, 0.04);
 
-      if (!prefersReducedMotion) {
-        wireCore.rotation.x = elapsed * 0.32;
-        wireCore.rotation.y = elapsed * 0.46;
-        shell.rotation.x = -elapsed * 0.18;
-        shell.rotation.y = elapsed * 0.28;
-        orbitalRing.rotation.z = elapsed * 0.24;
-        particles.rotation.y = elapsed * 0.08;
-        particles.rotation.x = Math.sin(elapsed * 0.2) * 0.12;
-
-        nodes.forEach((node, index) => {
-          const offset = elapsed * 0.7 + index * 0.42;
-          node.position.y = Math.sin(offset) * 0.42;
-          node.scale.setScalar(0.92 + Math.sin(offset * 1.6) * 0.12);
-        });
-      }
+      wireCore.rotation.x = elapsed * 0.34;
+      wireCore.rotation.y = elapsed * 0.46;
+      shell.rotation.x = elapsed * 0.16;
+      shell.rotation.y = -elapsed * 0.18;
+      ringA.rotation.z = elapsed * 0.22;
+      ringB.rotation.z = -elapsed * 0.18;
+      particles.rotation.y = elapsed * 0.08;
 
       camera.position.x = THREE.MathUtils.lerp(
         camera.position.x,
-        prefersReducedMotion ? 0 : pointer.x * 0.24,
+        prefersReducedMotion ? 0 : pointer.x * 0.2,
         0.03
       );
       camera.position.y = THREE.MathUtils.lerp(
         camera.position.y,
-        prefersReducedMotion ? 0.2 : -pointer.y * 0.18,
+        prefersReducedMotion ? 0.1 : -pointer.y * 0.16,
         0.03
       );
       camera.lookAt(0, 0, 0);
@@ -213,14 +198,13 @@ export function HeroScene() {
 
       wireCoreGeometry.dispose();
       wireCoreMaterial.dispose();
-      edgesGeometry.dispose();
-      edgesMaterial.dispose();
-      orbitalGeometry.dispose();
-      orbitalMaterial.dispose();
+      shellGeometry.dispose();
+      shellMaterial.dispose();
+      ringGeometry.dispose();
+      disposeMaterial(ringMaterial);
+      disposeMaterial(ringB.material);
       particlesGeometry.dispose();
       particlesMaterial.dispose();
-      nodeGeometry.dispose();
-      disposeMaterial(nodeMaterial);
       renderer.dispose();
       scene.clear();
 
@@ -231,22 +215,14 @@ export function HeroScene() {
   }, []);
 
   return (
-    <div className="relative h-[320px] overflow-hidden rounded-[28px] border border-border/80 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.14),transparent_42%),radial-gradient(circle_at_80%_10%,rgba(14,165,233,0.18),transparent_32%),linear-gradient(180deg,rgba(5,12,20,0.98),rgba(11,18,28,0.9))]">
-      <div
-        ref={containerRef}
-        aria-hidden="true"
-        className="absolute inset-0"
-      />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_15%,rgba(2,6,23,0.26)_70%,rgba(2,6,23,0.72)_100%)]" />
-      <div className="pointer-events-none absolute left-5 top-5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.26em] text-sky-100/80">
-        3D System Sketch
-      </div>
-      <div className="pointer-events-none absolute bottom-5 left-5 max-w-[15rem] space-y-2">
-        <p className="text-sm font-medium text-slate-100">Go workflows, queues, and state transitions.</p>
-        <p className="text-xs leading-relaxed text-slate-300/80">
-          A lightweight Three.js layer to make the portfolio feel more alive without pulling attention away from the backend work.
-        </p>
-      </div>
+    <div
+      className={cn(
+        "panel-surface relative overflow-hidden rounded-[30px]",
+        className
+      )}
+    >
+      <div ref={containerRef} aria-hidden="true" className="absolute inset-0" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_18%,rgba(2,6,23,0.32)_68%,rgba(2,6,23,0.72)_100%)]" />
     </div>
   );
 }
