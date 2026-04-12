@@ -7,6 +7,8 @@ export const resumeData = {
   email: profile.social.email,
   github: profile.social.github,
   linkedin: profile.social.linkedin,
+  cvUrl: "/ahmed-yassin-cv.pdf",
+  cvFileName: "Ahmed_Yassin_Ahmed_CV.pdf",
   summary:
     "Software Engineering student with project experience in backend engineering, API development, and workflow-heavy systems. Built applications in payments, recruitment, and coordination using Go, PostgreSQL, RabbitMQ, Next.js, Flutter, and Firebase.",
   education: [

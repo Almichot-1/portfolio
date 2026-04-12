@@ -1,6 +1,7 @@
 import { resumeData } from "@/content/resume";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Download, ExternalLink } from "lucide-react";
 
 export default function ResumePage() {
   return (
@@ -25,6 +26,16 @@ export default function ResumePage() {
               </a>
             </Button>
             <Button variant="outline" asChild>
+              <a href={resumeData.cvUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="h-4 w-4" /> Open CV
+              </a>
+            </Button>
+            <Button variant="outline" asChild>
+              <a href={resumeData.cvUrl} download={resumeData.cvFileName}>
+                <Download className="h-4 w-4" /> Download CV
+              </a>
+            </Button>
+            <Button variant="outline" asChild>
               <a href="/">Back to Portfolio</a>
             </Button>
           </div>
@@ -32,6 +43,31 @@ export default function ResumePage() {
 
         <Card>
           <CardContent className="space-y-7 p-7 md:p-8">
+            <section>
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-xl font-semibold">CV Preview</h2>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={resumeData.cvUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-4 w-4" /> Open in New Tab
+                    </a>
+                  </Button>
+                  <Button size="sm" asChild>
+                    <a href={resumeData.cvUrl} download={resumeData.cvFileName}>
+                      <Download className="h-4 w-4" /> Download PDF
+                    </a>
+                  </Button>
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-xl border border-border bg-secondary/20">
+                <iframe
+                  src={`${resumeData.cvUrl}#view=FitH`}
+                  title={`${resumeData.name} CV`}
+                  className="h-[780px] w-full"
+                />
+              </div>
+            </section>
+
             <section>
               <h2 className="mb-2 text-xl font-semibold">Professional Summary</h2>
               <p className="text-muted-foreground">{resumeData.summary}</p>

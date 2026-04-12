@@ -2,8 +2,10 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Download, FileText, Github, Linkedin, Mail } from "lucide-react";
 import { profile } from "@/content/portfolio";
+import { resumeData } from "@/content/resume";
+import { HeroScene } from "@/components/sections/hero-scene";
 
 export function Hero() {
   return (
@@ -33,7 +35,7 @@ export function Hero() {
       />
 
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
+        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_360px] md:items-center">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -58,6 +60,20 @@ export function Hero() {
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <a href="/resume">Resume</a>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <a
+                  href={resumeData.cvUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FileText className="h-4 w-4" /> Open CV
+                </a>
+              </Button>
+              <Button variant="ghost" asChild>
+                <a href={resumeData.cvUrl} download={resumeData.cvFileName}>
+                  <Download className="h-4 w-4" /> Download CV
+                </a>
               </Button>
             </div>
 
@@ -87,24 +103,34 @@ export function Hero() {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.12, duration: 0.45 }}
-            className="rounded-xl border border-border/80 bg-secondary/40 p-6 md:max-w-xs"
-          >
-            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              Backend focus
-            </p>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              {profile.proofStrip.map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          <div className="space-y-5 md:max-w-[360px]">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.08, duration: 0.45 }}
+            >
+              <HeroScene />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.14, duration: 0.45 }}
+              className="rounded-xl border border-border/80 bg-secondary/40 p-6"
+            >
+              <p className="mb-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                Backend focus
+              </p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {profile.proofStrip.map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

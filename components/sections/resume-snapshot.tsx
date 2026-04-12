@@ -48,6 +48,11 @@ export function ResumeSnapshot() {
               <Button asChild className="w-full justify-center">
                 <a href="/resume">View Full Resume</a>
               </Button>
+              <Button variant="outline" asChild className="w-full justify-center">
+                <a href={resumeData.cvUrl} target="_blank" rel="noopener noreferrer">
+                  Open PDF CV
+                </a>
+              </Button>
             </div>
           </CardContent>
         </Card>
