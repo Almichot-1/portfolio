@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
-import { SiteScene } from "@/components/site-scene";
 import "./globals.css";
 
 const sans = Space_Grotesk({
@@ -46,8 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body className={`${sans.variable} ${mono.variable} font-sans antialiased`}>
-        <SiteScene />
-        <div className="site-shell relative z-10">{children}</div>
+        {children}
       </body>
     </html>
   );

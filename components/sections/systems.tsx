@@ -1,16 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, ChevronUp, ExternalLink, PlayCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { ExternalLink, PlayCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { featuredProjects } from "@/content/portfolio";
 
 export function Systems() {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
-
   return (
     <section id="projects" className="px-4 py-8 md:py-10">
       <div className="mx-auto max-w-6xl">
@@ -30,10 +27,7 @@ export function Systems() {
           </motion.div>
 
           <div className="grid gap-6">
-            {featuredProjects.map((project, index) => {
-              const isExpanded = expandedIndex === index;
-
-              return (
+            {featuredProjects.map((project, index) => (
                 <motion.div
                   key={project.name}
                   initial={{ opacity: 0, y: 18 }}
@@ -83,7 +77,7 @@ export function Systems() {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                 >
-                                  Watch Demo <PlayCircle className="h-4 w-4" />
+                                  {project.demoLabel ?? "Demo"} <PlayCircle className="h-4 w-4" />
                                 </a>
                               </Button>
                             ) : null}
@@ -99,84 +93,55 @@ export function Systems() {
                           </p>
                         </div>
 
-                        <AnimatePresence initial={false}>
-                          {isExpanded ? (
-                            <motion.div
-                              key="expanded"
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -10 }}
-                              transition={{ duration: 0.2 }}
-                              className="space-y-6"
-                            >
-                              {project.demoEmbedUrl ? (
-                                <div className="panel-surface overflow-hidden rounded-[24px]">
-                                  <div className="aspect-video">
-                                    <iframe
-                                      src={project.demoEmbedUrl}
-                                      title={`${project.name} demo video`}
-                                      className="h-full w-full"
-                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                      allowFullScreen
-                                      loading="lazy"
-                                      referrerPolicy="strict-origin-when-cross-origin"
-                                    />
-                                  </div>
-                                </div>
-                              ) : null}
+                        {project.demoEmbedUrl ? (
+                          <div className="panel-surface overflow-hidden rounded-[24px]">
+                            <div className="aspect-video">
+                              <iframe
+                                src={project.demoEmbedUrl}
+                                title={`${project.name} demo video`}
+                                className="h-full w-full"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                                loading="lazy"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                              />
+                            </div>
+                          </div>
+                        ) : null}
 
-                              <div className="grid gap-6 md:grid-cols-2">
-                                <div>
-                                  <h3 className="section-kicker mb-3">Engineering Decisions</h3>
-                                  <ul className="space-y-3 text-sm text-muted-foreground md:text-base">
-                                    {project.decisions.map((decision) => (
-                                      <li key={decision} className="flex items-start gap-3">
-                                        <span className="mt-[10px] inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                                        <span>{decision}</span>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
+                        <div className="grid gap-6 md:grid-cols-2">
+                          <div>
+                            <h3 className="section-kicker mb-3">Engineering Decisions</h3>
+                            <ul className="space-y-3 text-sm text-muted-foreground md:text-base">
+                              {project.decisions.map((decision) => (
+                                <li key={decision} className="flex items-start gap-3">
+                                  <span className="mt-[10px] inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                                  <span>{decision}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
 
-                                <div>
-                                  <h3 className="section-kicker mb-3">Why It Matters</h3>
-                                  <p className="mb-4 text-sm leading-relaxed text-muted-foreground md:text-base">
-                                    {project.outcome}
-                                  </p>
-                                  <ul className="space-y-3 text-sm text-muted-foreground md:text-base">
-                                    {project.learnings.map((learning) => (
-                                      <li key={learning} className="flex items-start gap-3">
-                                        <span className="mt-[10px] inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                                        <span>{learning}</span>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              </div>
-                            </motion.div>
-                          ) : null}
-                        </AnimatePresence>
-
-                        <button
-                          onClick={() => setExpandedIndex(isExpanded ? null : index)}
-                          className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
-                        >
-                          {isExpanded ? (
-                            <>
-                              Show less <ChevronUp className="h-4 w-4" />
-                            </>
-                          ) : (
-                            <>
-                              Read case notes <ChevronDown className="h-4 w-4" />
-                            </>
-                          )}
-                        </button>
+                          <div>
+                            <h3 className="section-kicker mb-3">Why It Matters</h3>
+                            <p className="mb-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+                              {project.outcome}
+                            </p>
+                            <ul className="space-y-3 text-sm text-muted-foreground md:text-base">
+                              {project.learnings.map((learning) => (
+                                <li key={learning} className="flex items-start gap-3">
+                                  <span className="mt-[10px] inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                                  <span>{learning}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
                       </CardContent>
                     </div>
                   </Card>
                 </motion.div>
-              );
-            })}
+            ))}
           </div>
         </div>
       </div>

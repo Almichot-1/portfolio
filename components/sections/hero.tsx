@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Download, FileText, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { HeroScene } from "@/components/sections/hero-scene";
 import { profile } from "@/content/portfolio";
 import { resumeData } from "@/content/resume";
 
@@ -80,8 +79,26 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.08, duration: 0.5 }}
+                className="panel-surface relative min-h-[320px] overflow-hidden rounded-[30px] md:min-h-[420px]"
               >
-                <HeroScene className="h-[360px] md:h-[440px]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_24%,rgba(240,209,170,0.25),transparent_22%),radial-gradient(circle_at_78%_20%,rgba(188,136,88,0.18),transparent_24%),radial-gradient(circle_at_58%_72%,rgba(165,193,180,0.14),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent_40%)]" />
+                <div className="absolute inset-6 rounded-[26px] border border-white/10" />
+                <div className="absolute left-8 top-8 h-28 w-28 rounded-full border border-primary/20 bg-primary/10 blur-[2px]" />
+                <div className="absolute right-10 top-14 h-40 w-40 rounded-full border border-white/10 bg-white/[0.03]" />
+                <div className="absolute bottom-10 left-12 h-48 w-48 rounded-full border border-white/10 bg-[#a5c1b4]/10" />
+                <div className="absolute bottom-10 right-10 h-28 w-28 rounded-3xl border border-primary/20 bg-[#bc8858]/10" />
+
+                <div className="absolute bottom-8 left-8 right-8 space-y-4">
+                  <p className="section-kicker">Backend Focus</p>
+                  <div className="flex flex-wrap gap-3">
+                    {profile.proofStrip.map((item) => (
+                      <span key={item} className="inline-chip text-sm text-foreground">
+                        <span className="inline-block h-2 w-2 rounded-full bg-primary" />
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
 
               <motion.div
@@ -90,14 +107,11 @@ export function Hero() {
                 transition={{ delay: 0.16, duration: 0.45 }}
                 className="panel-surface rounded-[28px] p-5"
               >
-                <p className="section-kicker mb-4">Backend Focus</p>
-                <div className="flex flex-wrap gap-3">
-                  {profile.proofStrip.map((item) => (
-                    <span key={item} className="inline-chip text-sm text-slate-100">
-                      <span className="inline-block h-2 w-2 rounded-full bg-primary" />
-                      {item}
-                    </span>
-                  ))}
+                <p className="section-kicker mb-4">Contact</p>
+                <div className="space-y-3 text-sm text-muted-foreground">
+                  <p>{profile.social.email}</p>
+                  <p>Addis Ababa, Ethiopia</p>
+                  <p>Backend engineering for workflow-heavy platforms.</p>
                 </div>
               </motion.div>
             </div>

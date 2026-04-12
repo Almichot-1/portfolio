@@ -10,6 +10,7 @@ export type FeaturedProject = {
   learnings: string[];
   demoUrl?: string;
   demoEmbedUrl?: string;
+  demoLabel?: string;
 };
 
 export const profile = {
@@ -79,6 +80,8 @@ export const featuredProjects: FeaturedProject[] = [
       "How complex business workflows stay maintainable when the backend boundaries are explicit.",
       "How backend workflow design shapes every user-facing step in a multi-actor product.",
     ],
+    demoUrl: "https://maid-recruitment-frontend.vercel.app",
+    demoLabel: "Live Demo",
   },
   {
     name: "Maid Showcase MVP (simple_flow)",
@@ -123,6 +126,7 @@ export const featuredProjects: FeaturedProject[] = [
     ],
     demoUrl: "https://youtu.be/X75veFvFU24",
     demoEmbedUrl: "https://www.youtube.com/embed/X75veFvFU24",
+    demoLabel: "Video Demo",
   },
 ];
 
